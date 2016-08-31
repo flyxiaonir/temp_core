@@ -16,8 +16,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lf.core.api.TempAPI;
 import com.lf.tempcore.tempModule.tempDebuger.Debug;
 import com.lf.tempcore.tempModule.tempRemotComm.TempRemotAPIConnecter;
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
         /*ActivityInfo info= null;
         try {
             info = this.getPackageManager()
@@ -135,6 +138,9 @@ public class MainActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+            ImageView image = (ImageView) rootView.findViewById(R.id.main_image1);
+//            Glide.with(this).load("http://i3.17173.itc.cn/2014/dnf/2014/07/22/hongyan.jpg").into(image);
+            Glide.with(this).load(R.mipmap.ic_launcher).into(image);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
                 Debug.info("MainActivity",getArguments().getInt(ARG_SECTION_NUMBER)+"开始获取数据");
                 TempRemotAPIConnecter.INSTANCE.executeRemotAPI(TempRemotAPIConnecter.INSTANCE.createRemoteApi(TempAPI.class).userLogin("17783617732", "123456"), new Callback<TempResponse>() {
