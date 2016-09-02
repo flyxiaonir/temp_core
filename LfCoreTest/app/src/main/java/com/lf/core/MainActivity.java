@@ -1,6 +1,13 @@
 package com.lf.core;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
+import android.renderscript.Allocation;
+import android.renderscript.Element;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,14 +23,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
+import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.lf.core.api.TempAPI;
 import com.lf.tempcore.tempModule.tempDebuger.Debug;
 import com.lf.tempcore.tempModule.tempRemotComm.TempRemotAPIConnecter;
 import com.lf.tempcore.tempResponse.TempResponse;
+
+import java.io.File;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -138,23 +150,42 @@ public class MainActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            ImageView image = (ImageView) rootView.findViewById(R.id.main_image1);
-//            Glide.with(this).load("http://i3.17173.itc.cn/2014/dnf/2014/07/22/hongyan.jpg").into(image);
-            Glide.with(this).load(R.mipmap.ic_launcher).into(image);
+          final  ImageView image = (ImageView) rootView.findViewById(R.id.main_image1);
+            Button main_loadImage = (Button) rootView.findViewById(R.id.main_loadImage);
+            main_loadImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Debug.info("加载gif");
+                    Glide.with( getActivity() )
+                            .load( "http://love.doghouse.com.tw/image/wallpaper/011102/bf1554.jpg")
+                    .transform( new BlurTransformation( getActivity() ) )
+                            //.bitmapTransform( new BlurTransformation( context ) ) // this would work too!
+                            .into( image );
+                    }
+            });
+            File media = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/DCIM/Camear/20151111_080709_71191.mp4");
+//            Glide.with(getActivity()).load("http://c.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=33e67285d343ad4ba67b4ec4b7327699/574e9258d109b3de76576b48cebf6c81800a4c22.jpg") .into(image);
+//            Glide.with(this).load(Uri.fromFile(media)).into(image);
+//            Glide.with(this).load(R.mipmap.ic_launcher).into(image);
+            Glide.with( this )
+                    .load( "http://love.doghouse.com.tw/image/wallpaper/011102/bf1554.jpg")
+//                    .transform( new BlurTransformation( getActivity() ) )
+                    //.bitmapTransform( new BlurTransformation( context ) ) // this would work too!
+                    .into( image );
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-                Debug.info("MainActivity",getArguments().getInt(ARG_SECTION_NUMBER)+"开始获取数据");
-                TempRemotAPIConnecter.INSTANCE.executeRemotAPI(TempRemotAPIConnecter.INSTANCE.createRemoteApi(TempAPI.class).userLogin("17783617732", "123456"), new Callback<TempResponse>() {
-                    @Override
-                    public void onResponse(Call<TempResponse> call, Response<TempResponse> response) {
-                        Debug.info("MainActivity",response.body().toString());
+            Debug.info("MainActivity", getArguments().getInt(ARG_SECTION_NUMBER) + "开始获取数据");
+            TempRemotAPIConnecter.INSTANCE.executeRemotAPI(TempRemotAPIConnecter.INSTANCE.createRemoteApi(TempAPI.class).userLogin("17783617732", "123456"), new Callback<TempResponse>() {
+                @Override
+                public void onResponse(Call<TempResponse> call, Response<TempResponse> response) {
+                    Debug.info("MainActivity", response.body().toString());
 
-                    }
+                }
 
-                    @Override
-                    public void onFailure(Call<TempResponse> call, Throwable t) {
-                        Debug.info("MainActivity","获取数据失败"+t.toString());
-                    }
-                });
+                @Override
+                public void onFailure(Call<TempResponse> call, Throwable t) {
+                    Debug.info("MainActivity", "获取数据失败" + t.toString());
+                }
+            });
 
             return rootView;
         }
@@ -165,7 +196,52 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+    public static class BlurTransformation extends BitmapTransformation {
 
+        private RenderScript rs;
+
+        public BlurTransformation(Context context) {
+            super( context );
+
+            rs = RenderScript.create( context );
+        }
+
+        @Override
+        protected Bitmap transform(BitmapPool pool, Bitmap toTransform, int outWidth, int outHeight) {
+            Bitmap blurredBitmap = toTransform.copy( Bitmap.Config.ARGB_8888, true );
+
+            // Allocate memory for Renderscript to work with
+            Allocation input = Allocation.createFromBitmap(
+                    rs,
+                    blurredBitmap,
+                    Allocation.MipmapControl.MIPMAP_FULL,
+                    Allocation.USAGE_SHARED
+            );
+            Allocation output = Allocation.createTyped(rs, input.getType());
+
+            // Load up an instance of the specific script that we want to use.
+            ScriptIntrinsicBlur script = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
+            script.setInput(input);
+
+            // Set the blur radius
+            script.setRadius(10);
+
+            // Start the ScriptIntrinisicBlur
+            script.forEach(output);
+
+            // Copy the output to the blurred bitmap
+            output.copyTo(blurredBitmap);
+
+            toTransform.recycle();
+
+            return blurredBitmap;
+        }
+
+        @Override
+        public String getId() {
+            return "blur";
+        }
+    }
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.

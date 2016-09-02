@@ -23,14 +23,14 @@ import java.util.List;
  */
 public class TempPermissionUtil {
     private static final String TAG = "TempPermissionUtil";
-    private static final int REQUEST_AMAP=600;
+    private static final int REQUEST_CODE=600;
     /**
      * 请求高德地图相关权限
      *
      * @param cxt
      * @return 返回true 可直接使用权限
      */
-    public static boolean requestAmapPermission(final Context cxt) {
+    public static boolean requestNormalPermission(final Context cxt) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             List<String> permissionList =findDeniedPermissions(
@@ -56,7 +56,7 @@ public class TempPermissionUtil {
                     arrayPer[i]=permissionList.get(i);
                 }
                 if (arrayPer.length>0){
-                    ((Activity) cxt).requestPermissions(arrayPer,REQUEST_AMAP);
+                    ((Activity) cxt).requestPermissions(arrayPer,REQUEST_CODE);
                 }else{
                     return true;
                 }
@@ -67,7 +67,7 @@ public class TempPermissionUtil {
                     arrayPer[i]=permissionList.get(i);
                 }
                 if (arrayPer.length>0){
-                    ((Activity) cxt).requestPermissions(arrayPer,REQUEST_AMAP);
+                    ((Activity) cxt).requestPermissions(arrayPer,REQUEST_CODE);
                 }else{
                     return true;}
             }
@@ -230,7 +230,7 @@ public class TempPermissionUtil {
      }*/
     public static boolean onPermissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode){
-            case REQUEST_AMAP:
+            case REQUEST_CODE:
                 Debug.info(TAG,"地图权限返回");
                 for (int i=0;i<grantResults.length;i++){
                     if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
