@@ -36,6 +36,7 @@ public class TempPermissionUtil {
             List<String> permissionList =findDeniedPermissions(
                     (Activity) cxt,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
                     Manifest.permission.ACCESS_COARSE_LOCATION,
                     Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.ACCESS_WIFI_STATE,
@@ -48,9 +49,10 @@ public class TempPermissionUtil {
                     ((Activity) cxt).shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)||
                     ((Activity) cxt).shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_WIFI_STATE)||
                     ((Activity) cxt).shouldShowRequestPermissionRationale(Manifest.permission.INTERNET)||
+                    ((Activity) cxt).shouldShowRequestPermissionRationale(Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS)||
                     ((Activity) cxt).shouldShowRequestPermissionRationale(Manifest.permission.READ_PHONE_STATE)||
                     ((Activity) cxt).shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
-                Toast.makeText(cxt, "请允许以下权限，才能正常使用地图功能！", Toast.LENGTH_LONG).show();
+                Toast.makeText(cxt, "请允许以下权限，才能正常使用应用！", Toast.LENGTH_LONG).show();
                 String[] arrayPer = new String[permissionList.size()];
                 for (int i=0;i<permissionList.size();i++){
                     arrayPer[i]=permissionList.get(i);
