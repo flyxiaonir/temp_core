@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
                     Glide.with( getActivity() )
                             .load( "http://love.doghouse.com.tw/image/wallpaper/011102/bf1554.jpg")
                     .transform( new BlurTransformation( getActivity() ) )
-                            //.bitmapTransform( new BlurTransformation( context ) ) // this would work too!
+                            .bitmapTransform( new BlurTransformation( getActivity() ) ) // this would work too!
                             .into( image );
                     }
             });
@@ -254,6 +254,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
+
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             return PlaceholderFragment.newInstance(position + 1);
