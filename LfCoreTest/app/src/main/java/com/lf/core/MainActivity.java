@@ -1,6 +1,7 @@
 package com.lf.core;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,6 +19,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -80,8 +82,9 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                startActivity(new Intent(MainActivity.this,ActProgressTest.class));
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
             }
         });
 
@@ -139,9 +142,9 @@ public class MainActivity extends AppCompatActivity {
         public static PlaceholderFragment newInstance(int sectionNumber) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
+
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
-
             return fragment;
         }
 
@@ -150,42 +153,47 @@ public class MainActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-          final  ImageView image = (ImageView) rootView.findViewById(R.id.main_image1);
-            Button main_loadImage = (Button) rootView.findViewById(R.id.main_loadImage);
-            main_loadImage.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Debug.info("加载gif");
-                    Glide.with( getActivity() )
-                            .load( "http://love.doghouse.com.tw/image/wallpaper/011102/bf1554.jpg")
-                    .transform( new BlurTransformation( getActivity() ) )
-                            .bitmapTransform( new BlurTransformation( getActivity() ) ) // this would work too!
-                            .into( image );
+            if (getArguments().getInt(ARG_SECTION_NUMBER)==1){
+                final  ImageView image = (ImageView) rootView.findViewById(R.id.main_image1);
+                Button main_loadImage = (Button) rootView.findViewById(R.id.main_loadImage);
+                main_loadImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Debug.info("加载gif");
+                        Glide.with( getActivity() )
+                                .load( "http://love.doghouse.com.tw/image/wallpaper/011102/bf1554.jpg")
+                                .transform( new BlurTransformation( getActivity() ) )
+                                .bitmapTransform( new BlurTransformation( getActivity() ) ) // this would work too!
+                                .into( image );
                     }
-            });
-            File media = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/DCIM/Camear/20151111_080709_71191.mp4");
+                });
+                File media = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/DCIM/Camear/20151111_080709_71191.mp4");
 //            Glide.with(getActivity()).load("http://c.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=33e67285d343ad4ba67b4ec4b7327699/574e9258d109b3de76576b48cebf6c81800a4c22.jpg") .into(image);
 //            Glide.with(this).load(Uri.fromFile(media)).into(image);
 //            Glide.with(this).load(R.mipmap.ic_launcher).into(image);
-            Glide.with( this )
-                    .load( "http://love.doghouse.com.tw/image/wallpaper/011102/bf1554.jpg")
+                Glide.with( this )
+                        .load( "http://love.doghouse.com.tw/image/wallpaper/011102/bf1554.jpg")
 //                    .transform( new BlurTransformation( getActivity() ) )
-                    //.bitmapTransform( new BlurTransformation( context ) ) // this would work too!
-                    .into( image );
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            Debug.info("MainActivity", getArguments().getInt(ARG_SECTION_NUMBER) + "开始获取数据");
-            TempRemotAPIConnecter.INSTANCE.executeRemotAPI(TempRemotAPIConnecter.INSTANCE.createRemoteApi(TempAPI.class).userLogin("17783617732", "123456"), new Callback<TempResponse>() {
-                @Override
-                public void onResponse(Call<TempResponse> call, Response<TempResponse> response) {
-                    Debug.info("MainActivity", response.body().toString());
+                        //.bitmapTransform( new BlurTransformation( context ) ) // this would work too!
+                        .into( image );
+                textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
 
-                }
+                TempRemotAPIConnecter.INSTANCE.executeRemotAPI(TempRemotAPIConnecter.INSTANCE.createRemoteApi(TempAPI.class).userLogin("17783617732", "123456"), new Callback<TempResponse>() {
+                    @Override
+                    public void onResponse(Call<TempResponse> call, Response<TempResponse> response) {
+                        Debug.info("MainActivity", response.body().toString());
 
-                @Override
-                public void onFailure(Call<TempResponse> call, Throwable t) {
-                    Debug.info("MainActivity", "获取数据失败" + t.toString());
-                }
-            });
+                    }
+
+                    @Override
+                    public void onFailure(Call<TempResponse> call, Throwable t) {
+                        Debug.info("MainActivity", "获取数据失败" + t.toString());
+                    }
+                });
+            }else if (getArguments().getInt(ARG_SECTION_NUMBER)==3){
+
+            }
+
 
             return rootView;
         }

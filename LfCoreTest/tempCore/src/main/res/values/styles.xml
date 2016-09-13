@@ -1,20 +1,19 @@
 <resources>
-    <!--<style name="TempAppTheme" parent="AppTheme"/>-->
-    <style name="TempAppTheme" parent="LFAppTheme.Base">
+   <!-- <style name="TempAppTheme" parent="LFAppTheme.Base">
     </style>
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
-    <style name="LFAppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme.PopupOverlay" parent=""/>
+    <style name="LFAppTheme.Base" parent="">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <!--<item name="android:typeface">serif</item>-->
+        &lt;!&ndash;<item name="android:typeface">serif</item>&ndash;&gt;
         <item name="colorAccent">@color/temp_colorAccent</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/temp_baseTextColor_565656</item>
         <item name="android:windowBackground">@android:color/white</item>
-        <!--<item name="actionBarStyle">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>-->
-        <!--<item name="android:actionBarStyle">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>-->
+        &lt;!&ndash;<item name="actionBarStyle">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>&ndash;&gt;
+        &lt;!&ndash;<item name="android:actionBarStyle">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>&ndash;&gt;
 
-    </style>
+    </style>-->
    <!-- <style name="LFAppTheme">
 
     </style>-->
@@ -80,6 +79,6 @@
         <item name="android:maxHeight">20dip</item>
     </style>
     <!--程序异常提示框-->
-    <style name="AppTheme.Dialog" parent="Theme.AppCompat" />
+    <!--<style name="AppTheme.Dialog" parent="Theme.AppCompat" />-->
 
 </resources>

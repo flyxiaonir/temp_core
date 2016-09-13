@@ -5,7 +5,12 @@
     android:layout_height="fill_parent"
     android:orientation="horizontal"
     android:padding="8dp" >
-    <com.rey.material.widget.ProgressView
+    <com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar
+        android:id="@+id/loadingImageView"
+        app:mlpb_enable_circle_background="false"
+        android:layout_width="60dp"
+        android:layout_height="60dp"/>
+    <!--<com.rey.material.widget.ProgressView
         android:id="@+id/loadingImageView"
         android:layout_width="55dp"
         android:layout_height="55dp"
@@ -13,7 +18,7 @@
         app:pv_autostart="true"
         app:pv_progressMode="indeterminate"
         app:pv_progressStyle="@style/LightInCircularProgressDrawable"
-        />
+        />-->
     <!--<ProgressBar-->
     <!--app:pv_autostart="true"-->
     <!--app:pv_circular="true"-->

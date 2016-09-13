@@ -84,14 +84,14 @@ public abstract class TempMVPActivity extends AutoLayoutActivity {
      */
     protected void showProgress(boolean shouldCanceledOnTouchOutside) {
 
-        if (mProgressDailog != null) {
+       /* if (mProgressDailog != null) {
             mProgressDailog.setCanceledOnTouchOutside(shouldCanceledOnTouchOutside);
             showProgressDialog();
         } else {
             mProgressDailog = new TempCustomProgressDialog(this, getResources().getString(R.string.temp_loading));
             mProgressDailog.setCanceledOnTouchOutside(shouldCanceledOnTouchOutside);
             showProgressDialog();
-        }
+        }*/
     }
 
 

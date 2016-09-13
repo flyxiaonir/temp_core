@@ -71,7 +71,7 @@ public  abstract class TempActivity extends TempBaseActivity {
         Height = dm.heightPixels;
         Debug.info("Width="+Width+"||Height="+Height);
         super.onCreate(savedInstanceState);
-        setVolumeControlStream(AudioManager.STREAM_MUSIC);// 使得音量键控制媒体声音
+//        setVolumeControlStream(AudioManager.STREAM_MUSIC);// 使得音量键控制媒体声音
         returnBack();
 //        if (BuildConfig.DEBUG) {
 //            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());

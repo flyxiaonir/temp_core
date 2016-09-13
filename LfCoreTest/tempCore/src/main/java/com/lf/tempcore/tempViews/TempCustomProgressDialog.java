@@ -6,12 +6,28 @@ import android.view.Gravity;
 import android.widget.TextView;
 
 import com.lf.tempcore.R;
-import com.rey.material.widget.ProgressView;
+import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
 
 public class TempCustomProgressDialog extends Dialog {
-    ProgressView mProgressView;
-    public TempCustomProgressDialog(Context context, String strMessage) {
+//   private CircleProgressBar mProgressView;
+public TempCustomProgressDialog(Context context, String strMessage) {
+    this(context, R.style.CustomProgressDialog, strMessage);
+}
+    public TempCustomProgressDialog(Context context, int themeResId, String strMessage) {
+        super(context, themeResId);
+        this.setContentView(R.layout.temp_custom_progress_dialog_layout);
+        this.getWindow().getAttributes().gravity = Gravity.CENTER;
+//        mProgressView = (CircleProgressBar) this.findViewById(R.id.loadingImageView);
+
+        TextView tvMsg = (TextView) this.findViewById(R.id.id_tv_loadingmsg);
+        if (tvMsg != null) {
+            tvMsg.setText(strMessage);
+        }
+
+    }
+    //    ProgressView mProgressView;
+   /* public TempCustomProgressDialog(Context context, String strMessage) {
         this(context, R.style.CustomProgressDialog, strMessage);
     }
     public TempCustomProgressDialog(Context context, int theme , String strMessage) {
@@ -21,12 +37,12 @@ public class TempCustomProgressDialog extends Dialog {
         mProgressView = (ProgressView) this.findViewById(R.id.loadingImageView);
 
         TextView tvMsg = (TextView) this.findViewById(R.id.id_tv_loadingmsg);
-        if (tvMsg != null) {  
-            tvMsg.setText(strMessage);  
+        if (tvMsg != null) {
+            tvMsg.setText(strMessage);
         }
 
 
-    }  
+    }  */
 
     @Override  
     public void onWindowFocusChanged(boolean hasFocus) {  

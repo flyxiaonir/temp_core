@@ -26,7 +26,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:design:23.3.0'
     compile 'com.android.support:cardview-v7:23.3.0'
-//    compile 'com.android.support:support-v4:23.3.0'
     //    compile 'com.android.support:customtabs:23.3.0'
 
     // retrofit
@@ -52,6 +51,7 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
+    compile('com.lsjwzh:materialloadingprogressbar:0.5.8-RELEASE')
     //    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'
 
     // rxjava-retrofit
@@ -70,7 +70,7 @@ dependencies {
 
     //    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.github.rey5137:material:1.2.2'
+//    compile 'com.github.rey5137:material:1.2.2'
     //    compile 'ch.acra:acra:4.8.5'
     compile 'com.zhy:autolayout:1.4.3'
     compile 'com.bigkoo:convenientbanner:2.0.5'
@@ -117,8 +117,8 @@ dependencies {
     //    compile 'com.jcodecraeer:xrecyclerview:1.2.7'
 
     //支持图片缩放
-    compile 'com.facebook.rebound:rebound:0.3.8'
-    compile 'com.nineoldandroids:library:2.4.0'
-    compile 'com.github.chrisbanes.photoview:library:1.2.3'
+//    compile 'com.facebook.rebound:rebound:0.3.8'
+//    compile 'com.nineoldandroids:library:2.4.0'
+//    compile 'com.github.chrisbanes.photoview:library:1.2.3'
 
 }
