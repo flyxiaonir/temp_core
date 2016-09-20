@@ -1,29 +1,45 @@
 <resources>
-   <!-- <style name="TempAppTheme" parent="LFAppTheme.Base">
-    </style>
-    <style name="AppTheme.PopupOverlay" parent=""/>
-    <style name="LFAppTheme.Base" parent="">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        &lt;!&ndash;<item name="android:typeface">serif</item>&ndash;&gt;
-        <item name="colorAccent">@color/temp_colorAccent</item>
-        <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/temp_baseTextColor_565656</item>
-        <item name="android:windowBackground">@android:color/white</item>
-        &lt;!&ndash;<item name="actionBarStyle">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>&ndash;&gt;
-        &lt;!&ndash;<item name="android:actionBarStyle">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>&ndash;&gt;
-
-    </style>-->
-   <!-- <style name="LFAppTheme">
-
-    </style>-->
-    <!--<style name="LFAppTheme.NoActionBar">
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/temp_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/temp_colorPrimaryDark</item>
+        <item name="colorAccent">@color/theme_icons</item>
+        <item name="android:windowBackground">@color/theme_background</item>
+        <item name="android:textColorPrimary">@color/theme_icons</item>
+        <item name="actionMenuTextColor">@color/theme_icons</item>
+        <item name="android:textColorSecondary">@color/theme_icons</item>
+        <item name="android:windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/temp_baseTextColor_565656</item>
-    </style>-->
-    <!-- Base application theme. -->
+    </style>
+    <style name="MaterialSearchViewStyle">
+        <!-- Background for the search bar-->
+        <item name="searchBackground">@color/temp_colorPrimary</item>
+
+        <!-- Change voice icon-->
+        <item name="searchVoiceIcon">@drawable/ic_action_voice_search_inverted</item>
+
+        <!-- Change clear text icon-->
+        <item name="searchCloseIcon">@drawable/ic_action_navigation_close_inverted</item>
+
+        <!-- Change up icon-->
+        <item name="searchBackIcon">@drawable/ic_action_navigation_arrow_back_inverted</item>
+
+        <!-- Change icon for the suggestions-->
+        <item name="searchSuggestionIcon">@drawable/ic_suggestion</item>
+
+        <!-- Change background for the suggestions list view-->
+        <item name="searchSuggestionBackground">@android:color/white</item>
+
+        <!-- Change text color for edit text. This will also be the color of the cursor-->
+        <item name="android:textColor">@color/theme_primary_text_inverted</item>
+
+        <!-- Change hint text color for edit text-->
+        <item name="android:textColorHint">@color/theme_secondary_text_inverted</item>
+
+        <!-- Hint for edit text-->
+        <item name="android:hint">@string/search_hint</item>
+    </style>
     <style name="temp_dialog_theme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <!--item RadioButton or CheckBox color-->
         <item name="colorControlNormal">@android:color/white</item>

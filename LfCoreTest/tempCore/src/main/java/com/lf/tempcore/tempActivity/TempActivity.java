@@ -151,7 +151,7 @@ public  abstract class TempActivity extends TempBaseActivity {
         Toolbar toolbarTop = (Toolbar) findViewById(R.id.toolbar_top);
         if (toolbarTop!=null){
             toolbarTop.setTitle("");
-            toolbarTop.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            toolbarTop.setBackgroundColor(getResources().getColor(R.color.temp_colorPrimary));
             toolbarTop.setNavigationIcon(R.mipmap.body_actionbar_back_icon_transparent);
 
             TextView mTitle = (TextView) toolbarTop.findViewById(R.id.toolbar_title);
