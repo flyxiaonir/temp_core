@@ -68,57 +68,7 @@ public abstract class TempPullablePresenterImpl<RESPONSE extends TempResponse> i
             public void onFailure(Call<RESPONSE> call, Throwable t) {
 
             }
-        } /*new TempRemoteApiDao.OnCallBack<RESPONSE>() {
-            @Override
-            public void onSucceed(RESPONSE data) {
-                if (mView!=null&&data.getFlag()==1) {
-                    switch (status) {
-                        case INIT:
-                            currentPage++;
-//                            setCurrentPage();
-                            mView.onInit(data);
-                            break;
-                        case REFRESH:
-                            currentPage++;
-                            mView.refreshStatus(true);
-                            mView.onRefresh(data);
-                            break;
-                        case LOADMORE:
-                            currentPage++;
-                            mView.loadMoreStatus(true);
-                            mView.onLoadmore(data);
-                            break;
-                    }
-
-                }
-            }
-
-            @Override
-            public void onCompleted() {
-                if (mView!=null) {
-                    mView.dismissPullableProgressDialog();
-
-                }
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                if (mView!=null) {
-                    mView.dismissPullableProgressDialog();
-//                    mView.showConnectError();
-                    switch (status) {
-                        case INIT:
-                            break;
-                        case REFRESH:
-                            mView.refreshStatus(false);
-                            break;
-                        case LOADMORE:
-                            mView.loadMoreStatus(false);
-                            break;
-                    }
-                }
-            }
-        }*/);
+        } );
     }
 //    public abstract Observable<RESPONSE> createObservable(int queryPage, int querysize, int currentPage) ;
     public abstract Call<RESPONSE> createObservable(int queryPage, int querysize, int currentPage) ;
